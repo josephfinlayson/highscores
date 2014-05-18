@@ -17,6 +17,7 @@ if (Meteor.isServer) {
     });
 
     // Maps to: /api/get_user
+    // usage: jQuery.get('api/get_highscores').success(function(response){console.log(response)})
     RESTstop.add('get_highscores', {
         method: 'GET'
     }, function() {
@@ -30,6 +31,7 @@ if (Meteor.isServer) {
     });
 
     // Maps to, for example: /api/get_num/42
+    // usage: jQuery.post('api/post_highscore',{user:"string",score:111})
     RESTstop.add('post_highscore', {
         method: 'POST'
     }, function() {
