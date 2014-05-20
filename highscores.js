@@ -23,6 +23,7 @@ if (Meteor.isServer) {
     }, function() {
         a  = {}
         n = 0
+        //iterates through collects to return only data .fetch() should also do this
         Highscores.find({}).forEach(function (post) {
             a[n] = post;
             n++
