@@ -7,8 +7,15 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Highscores = new Meteor.Collection('highscores');
-    Meteor.startup(function() {
+    Meteor.startup(function() {  
+        return Meteor.methods({
+            // Meteor.call('removeAllPosts')
+            // From the console, this will remove all stored posts.
 
+            removeAllPosts: function() { 
+                return Highscores.remove({});
+            }
+        })
     });
 
     // Global configuration
@@ -18,14 +25,13 @@ if (Meteor.isServer) {
 
     // Maps to: /api/get_user
     // usage: jQuery.get('api/get_highscores').success(function(response){console.log(response)})
-    RESTstop.add('get_highscores', {
-        method: 'GET'
-    }, function() {
-        a  = {}
-        n = 0
-        Highscores.find({}).forEach(function (post) {
-            a[n] = post;
-            n++
+    RESTstop.add('get_highscores', { method: 'GET'}, 
+        function() {
+            a  = {}
+            n = 0
+            Highscores.find({},{sort: { score : -1 } }).forEach(function (post) { // THIS ISN'T WORKING!
+                a[n] = post;
+                n++
         });
         return a;
     });
@@ -35,10 +41,16 @@ if (Meteor.isServer) {
     RESTstop.add('post_highscore', {
         method: 'POST'
     }, function() {
-
         user = this.params.user;
-        score = this.params.score;
-        if (user && score) {
+        score = Number(this.params.score);
+        exists = false;
+        Highscores.find({}).forEach(function(post){
+            if (post.user == user) {
+                post.score = score;
+                exists = true;
+            }
+        })
+        if (!exists && user && score) {
             Highscores.insert({
                 user: user,
                 score: score
