@@ -23,8 +23,9 @@ if (Meteor.isServer) {
         use_auth: false
     });
 
-    // Maps to: /api/get_user
+    // Maps to: http://highscores_api.meteor.com/api/get_highscores
     // usage: jQuery.get('api/get_highscores').success(function(response){console.log(response)})
+<<<<<<< HEAD
     RESTstop.add('get_highscores', { method: 'GET'}, 
         function() {
             a  = {}
@@ -32,11 +33,22 @@ if (Meteor.isServer) {
             Highscores.find({},{sort: { score : -1 } }).forEach(function (post) { // THIS ISN'T WORKING!
                 a[n] = post;
                 n++
+=======
+    RESTstop.add('get_highscores', {
+        method: 'GET'
+    }, function() {
+        var a  = {}
+        var n = 0
+        //iterates through collections to return only data .fetch() should also do this
+        Highscores.find({}).forEach(function (post) {
+            a[n] = post;
+            n++
+>>>>>>> c2f485fbe2c3f3ce851cc7b98a03291ce854710a
         });
         return a;
     });
 
-    // Maps to, for example: /api/get_num/42
+    // Maps to, for example: http://highscores_api.meteor.com/api/post_higscore
     // usage: jQuery.post('api/post_highscore',{user:"string",score:111})
     RESTstop.add('post_highscore', {
         method: 'POST'
