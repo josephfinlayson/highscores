@@ -48,29 +48,30 @@ if (Meteor.isServer) {
         user = this.params.user;
         score = Number(this.params.score);
         exists = false;
-        Highscores.find({}).forEach(function(post) {
-            if (post.user == user) {
-                id_to_update == post._id;
-                console.log(post);
-                post.score = score
+
+        if (user && score) {
+            Highscores.find({}).forEach(function(post) {
+                if (post.user == user) {
+                    id_to_update == post._id;
+                    console.log(post);
+                    post.score = score
+                }
+            })
+
+            //inserts user only if the user does not already exist
+            if (!id_to_update) {
+                Highscores.insert({
+                    user: user,
+                    score: score
+                });
+            } else {
+                Highscores.update({
+                    _id: id_to_update
+                }, {
+                    user: user,
+                    score: score
+                });
             }
-        })
-
-        //inserts user only if the user does not already exist
-        if (!id_to_update && user && score) {
-            Highscores.insert({
-                user: user,
-                score: score
-            });
-        } else {
-            Highscores.update(
-            {
-                _id: id_to_update
-            }, {
-                user: user,
-                score: score
-            });
         }
-
     });
 }
