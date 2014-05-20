@@ -21,8 +21,8 @@ if (Meteor.isServer) {
     RESTstop.add('get_highscores', {
         method: 'GET'
     }, function() {
-        a  = {}
-        n = 0
+        var a  = {}
+        var n = 0
         //iterates through collections to return only data .fetch() should also do this
         Highscores.find({}).forEach(function (post) {
             a[n] = post;
