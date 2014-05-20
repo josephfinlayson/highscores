@@ -3,8 +3,6 @@ if (Meteor.isClient) {
 }
 
 
-
-
 if (Meteor.isServer) {
     Highscores = new Meteor.Collection('highscores');
     Meteor.startup(function() {  
@@ -25,20 +23,11 @@ if (Meteor.isServer) {
 
     // Maps to: http://highscores_api.meteor.com/api/get_highscores
     // usage: jQuery.get('api/get_highscores').success(function(response){console.log(response)})
-    RESTstop.add('get_highscores', { method: 'GET'}, 
-        function() {
-            a  = {}
-            n = 0
-            Highscores.find({},{sort: { score : -1 } }).forEach(function (post) { // THIS ISN'T WORKING!
-                a[n] = post;
-                n++
-    RESTstop.add('get_highscores', {
-        method: 'GET'
-    }, function() {
+    RESTstop.add('get_highscores', {method: 'GET'}, function() {
         var a  = {}
         var n = 0
         //iterates through collections to return only data .fetch() should also do this
-        Highscores.find({}).forEach(function (post) {
+        Highscores.find({},{sort: { score : -1 } }).forEach(function (post) {
             a[n] = post;
             n++
         });
@@ -68,6 +57,4 @@ if (Meteor.isServer) {
         }
 
     });
-
-
 }
