@@ -48,6 +48,8 @@ if (Meteor.isServer) {
                 exists = true;
             }
         })
+        
+        //inserts user only if the user does not already exist
         if (!exists && user && score) {
             Highscores.insert({
                 user: user,
