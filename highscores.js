@@ -5,12 +5,12 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Highscores = new Meteor.Collection('highscores');
-    Meteor.startup(function() {  
+    Meteor.startup(function() {
         return Meteor.methods({
             // Meteor.call('removeAllPosts')
             // From the console, this will remove all stored posts.
 
-            removeAllPosts: function() { 
+            removeAllPosts: function() {
                 return Highscores.remove({});
             }
         })
@@ -23,11 +23,17 @@ if (Meteor.isServer) {
 
     // Maps to: http://highscores_api.meteor.com/api/get_highscores
     // usage: jQuery.get('api/get_highscores').success(function(response){console.log(response)})
-    RESTstop.add('get_highscores', {method: 'GET'}, function() {
-        var a  = {}
+    RESTstop.add('get_highscores', {
+        method: 'GET'
+    }, function() {
+        var a = {}
         var n = 0
         //iterates through collections to return only data .fetch() should also do this
-        Highscores.find({},{sort: { score : -1 } }).forEach(function (post) {
+        Highscores.find({}, {
+            sort: {
+                score: -1
+            }
+        }).forEach(function(post) {
             a[n] = post;
             n++
         });
@@ -42,20 +48,28 @@ if (Meteor.isServer) {
         user = this.params.user;
         score = Number(this.params.score);
         exists = false;
-        Highscores.find({}).forEach(function(post){
+        Highscores.find({}).forEach(function(post) {
             if (post.user == user) {
-                post.score = score;
-                exists = true;
+                id_to_update == post._id;
+                console.log(post);
+                post.score = score
             }
         })
-        
+
         //inserts user only if the user does not already exist
-        if (!exists && user && score) {
+        if (!id_to_update && user && score) {
             Highscores.insert({
                 user: user,
                 score: score
             });
-
+        } else {
+            Highscores.update(
+            {
+                _id: id_to_update
+            }, {
+                user: user,
+                score: score
+            });
         }
 
     });
