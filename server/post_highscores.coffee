@@ -13,16 +13,14 @@ method: "POST",
 
         # If yes, update them. If no, create them.
         if id_to_update
-            c = Highscores.update
+            Highscores.update
                 _id: id_to_update,
                     user: user
                     score: score
-            console.log c
         else
-            c = Highscores.insert
+            Highscores.insert
                 user: user
                 score: score
-            console.log c
         "OK" #this will be returned
     else
         "Not OK"
