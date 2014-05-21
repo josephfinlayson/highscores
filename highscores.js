@@ -40,6 +40,27 @@ if (Meteor.isServer) {
         return a;
     });
 
+    // Maps to: http://highscores_api.meteor.com/api/user_exists
+    // usage: jQuery.get('api/user_exists/NotARealUr2').success(function(response){console.log(response)})
+    RESTstop.add('user_exists/:user', {
+        method: 'GET'
+    }, function() {
+        var user = this.params.user;
+        var a = {};
+        a.exists = false;   
+        var collection = Highscores.find({user : user});
+        collection.forEach (
+            function(post) {
+                console.log("for: " + post.user);
+                if (user == post.user) {
+                    a.exists = true;
+                }
+        })
+        return a;
+    });
+
+
+
     // Maps to, for example: http://highscores_api.meteor.com/api/post_higscore
     // usage: jQuery.post('api/post_highscore',{user:"string",score:111})
     RESTstop.add('post_highscore', {
@@ -50,14 +71,11 @@ if (Meteor.isServer) {
         var id_to_update = false;
         
         if (user && score) {
-
-            var collection = Highscores.find({user : user})
-
+            var collection = Highscores.find({user : user});
             collection.forEach(
                 function(post) {
                     if (post.user === user) {
                         id_to_update = post._id;
-
                     }
                 }
             );
@@ -78,5 +96,7 @@ if (Meteor.isServer) {
             }
         }
     });
+
+
 
 }
