@@ -32,7 +32,7 @@ if (Meteor.isServer) {
             a[n] = post;
             n++
         });
-//        a = Highscores.find({}, {sort: {score: -1}}).fetch(); // This doesn't work. Any idea why?
+        a = Highscores.find({}, {sort: {score: -1}}).limit(100).fetch(); // This doesn't work. Any idea why?
         return a;
     });
 
