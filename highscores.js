@@ -34,6 +34,16 @@ if (Meteor.isServer) {
             returnData[i] = array[i];
         }
         return returnData;
+        /*
+        var a = {}
+        var n = 0
+        //iterates through collections to return only data .fetch() should also do this
+        Highscores.find({}, {sort: {score: -1}}).forEach(function(post) {
+            a[n] = post;
+            n++
+        });
+        a = Highscores.find({}, {sort: {score: -1}}).limit(100).fetch(); // This doesn't work. Any idea why?
+        return a;*/
     });
 
     // Maps to: http://highscores_api.meteor.com/api/user_exists
