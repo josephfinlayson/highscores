@@ -28,15 +28,11 @@ if (Meteor.isServer) {
         var a = {}
         var n = 0
         //iterates through collections to return only data .fetch() should also do this
-        Highscores.find({}, {
-            sort: {
-                score: -1
-            }
-        }).forEach(function(post) {
+        Highscores.find({}, {sort: {score: -1}}).forEach(function(post) {
             a[n] = post;
             n++
         });
-        console.log
+//        a = Highscores.find({}, {sort: {score: -1}}).fetch(); // This doesn't work. Any idea why?
         return a;
     });
 
@@ -67,11 +63,13 @@ if (Meteor.isServer) {
         var id_to_update = false;
         
         if (user && score) {
+            // Does this user exist already?
             var collection = Highscores.find({"user" : user}).fetch();
             if (collection.length != 0) {
                 id_to_update = collection[0]._id;
             }
-            // inserts user only if the user does not already exist
+
+            // If yes, update them. If no, create them.
             if (id_to_update) {
                 Highscores.update({
                     _id: id_to_update
