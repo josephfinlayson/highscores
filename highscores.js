@@ -25,15 +25,15 @@ if (Meteor.isServer) {
     RESTstop.add('get_highscores', {
         method: 'GET'
     }, function() {
-        var a = {}
-        var n = 0
-        //iterates through collections to return only data .fetch() should also do this
-        Highscores.find({}, {sort: {score: -1}}).forEach(function(post) {
-            a[n] = post;
-            n++
-        });
-//        a = Highscores.find({}, {sort: {score: -1}}).fetch(); // This doesn't work. Any idea why?
-        return a;
+        var returnData = {}
+        // Get me some data in an array
+        array = Highscores.find({}, {sort: {score: -1}}).fetch(); // This doesn't work. Any idea why?
+
+        // Something doesn't like returning arrays (Meteor? RESTstop?). So, make in an object
+        for (var i = 0; i < array.length; i++) {
+            returnData[i] = array[i];
+        }
+        return returnData;
     });
 
     // Maps to: http://highscores_api.meteor.com/api/user_exists
