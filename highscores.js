@@ -25,7 +25,7 @@ if (Meteor.isServer) {
     RESTstop.add('get_highscores', {
         method: 'GET'
     }, function() {
-        var returnData = {}
+        var returnData = {};
         // Get me some data in an array
         array = Highscores.find({}, {sort: {score: -1}}).fetch(); // This doesn't work. Any idea why?
 
