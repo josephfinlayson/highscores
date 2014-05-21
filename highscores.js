@@ -26,22 +26,19 @@ if (Meteor.isServer) {
         method: 'GET'
     }, function() {
         var returnData = {};
+        var n = 0;
         // Get me some data in an array
         array = Highscores.find({}, {sort: {score: -1}}).fetch(); // This doesn't work. Any idea why?
 
         // Something doesn't like returning arrays (Meteor? RESTstop?). So, make in an object
-        for (var i = 0; i < array.length; i++) {
-            returnData[i] = array[i];
-        }
-        return returnData;
-        /*
-        var a = {}
-        var n = 0
-        //iterates through collections to return only data .fetch() should also do this
-        Highscores.find({}, {sort: {score: -1}}).forEach(function(post) {
-            a[n] = post;
+        array.forEach(function(post) {
+            returnData[n] = post;
             n++
         });
+        
+        return returnData;
+        
+        /*
         a = Highscores.find({}, {sort: {score: -1}}).limit(100).fetch(); // This doesn't work. Any idea why?
         return a;*/
     });
