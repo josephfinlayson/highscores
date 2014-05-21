@@ -47,17 +47,17 @@ if (Meteor.isServer) {
     }, function() {
         var user = this.params.user;
         var score = Number(this.params.score);
-        var id_to_update
+        var id_to_update = false;
         
         if (user && score) {
 
-            var collection = Highscores.find({})
+            var collection = Highscores.find({user : user})
 
             collection.forEach(
                 function(post) {
                     if (post.user === user) {
                         id_to_update = post._id;
-                        post.score = score;
+
                     }
                 }
             );
@@ -70,7 +70,6 @@ if (Meteor.isServer) {
                     user: user,
                     score: score
                 });
-
             } else {
                 Highscores.insert({
                     user: user,
