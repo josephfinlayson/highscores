@@ -3,8 +3,6 @@
 RESTstop.add "get_highscores",
 method: "GET",
 -> #start of anonymous function
-    returnData = {}
-
     # Get me some data in an array
     array = Highscores.find({}, # This doesn't work. Any idea why?
       sort:
@@ -12,5 +10,14 @@ method: "GET",
     ).fetch()
     # coffeelicious for loops
     for post, index in array
-      returnData[index] = post
-    returnData #last thing in coffeescript is always returned
+      post
+     #last thing in coffeescript is always returned. Here an array of posts is generated then returned:
+     
+     #compiles to this
+    #var _results = [];
+    #for (index = _i = 0, _len = array.length; _i < _len; index = ++_i) {
+      #post = array[index];
+      #_results.push(post);
+    #}
+    #return _results;
+ #
