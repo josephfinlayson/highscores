@@ -8,6 +8,7 @@ install:
 	cd ..
 	# meteor
 test:
+	echo "asdad";
 	meteor
 	cd tests
 	jasmine-node . 

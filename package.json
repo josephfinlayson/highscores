@@ -1,0 +1,22 @@
+{
+  "name": "highscores",
+  "version": "0.0.0",
+  "description": "highscores ==========",
+  "main": "highscores.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jasmine-node tests/."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/josephfinlayson/highscores.git"
+  },
+  "author": "Joseph, George",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josephfinlayson/highscores/issues"
+  },
+  "homepage": "https://github.com/josephfinlayson/highscores"
+}
