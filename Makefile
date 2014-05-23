@@ -6,8 +6,9 @@ install:
 	cd tests && npm install
 	npm install -g jasmine-node
 	cd ..
-	meteor
+	# meteor
 test:
+	meteor
 	cd tests
 	jasmine-node . 
 # .PHONY: test
