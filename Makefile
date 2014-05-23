@@ -1,8 +1,11 @@
 install:
 	curl https://install.meteor.com | /bin/sh
-	npm i -g karma phantomjs istanbul grunt-cli selenium-webdriver coffee-script meteorite
-	cd test/rtd && npm install --save-optional && npm i karma-mocha karma-chai karma-mocha-reporter --save-dev
-# test:
-# 	cd test/rtd && grunt runOnce
+	cd tests && npm install
+	npm install -g jasmine-node
+	cd ..
+	meteor
+test:
+	cd tests
+	jasmine-node . 
 
 # .PHONY: test
