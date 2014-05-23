@@ -1,15 +1,13 @@
+language: node_js
+node_js:
+  - "0.10"
 install:
-	curl https://install.meteor.com | /bin/sh
-	npm install -g meteorite
-	# meteor install
-	mrt install
-	cd tests && npm install
-	npm install -g jasmine-node
-	cd ..
-	# meteor
+  - "curl -L http://git.io/3l-rRA | /bin/sh"
+services:
+  - mongodb
 test:
 	echo "asdad";
 	meteor
 	cd tests
 	jasmine-node . 
-# .PHONY: test
+# .PHONY: tests
