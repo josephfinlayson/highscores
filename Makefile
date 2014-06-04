@@ -1,5 +1,5 @@
 install:
-	meteor&
+	meteor
 test: 
 	meteor
 .PHONY: test
