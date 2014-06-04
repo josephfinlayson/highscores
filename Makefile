@@ -1,3 +1,5 @@
+install:
+	meteor&
 test: 
-	laika $$LAIKA_OPTIONS
+	meteor
 .PHONY: test
