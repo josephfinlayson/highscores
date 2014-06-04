@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "jasmine-node tests/."
+    "start": "meteor",
+    "test": "jasmine-node --captureExceptions tests/."
   },
   "repository": {
     "type": "git",
