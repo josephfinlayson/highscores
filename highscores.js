@@ -61,8 +61,8 @@ if (Meteor.isServer) {
     });
 
 
-    // Maps to: http://highscores_api.meteor.com/api/get_highscores
-    // usage: jQuery.get('api/get_highscores').success(function(response){console.log(response)})
+    // Maps to: http://highscores_api.meteor.com/api/get_groupscores
+    // usage: jQuery.get('api/get_groupscores/motorcontrol/george').success(function(response){console.log(response)})
     RESTstop.add('get_groupscores/:group/:user', {
         method: 'GET'
     }, function() { 
