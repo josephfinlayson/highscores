@@ -45,7 +45,8 @@ if (Meteor.isServer) {
     RESTstop.add('get_highscores', {
         method: 'GET'
     }, function() {
-        var returnData = {}
+        var returnData = {};
+        var n = 0;
         // Get me some data in an array
         array = Highscores.find({}, {sort: {score: -1}}).fetch();
 
