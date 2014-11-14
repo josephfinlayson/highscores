@@ -153,13 +153,14 @@ if (Meteor.isServer) {
         var user = String(this.params.user);
         var score = Number(this.params.score);
         var group = String(this.params.group);
+        var dextrickeryID = String(this.params.dextrickeryID);
         var id_to_update = false;
         console.log("user: " + user + "  score: " + score);
         console.log("0");
 
         if (user && score) {
             console.log("1");
-            // Does this user exist already?
+            // Does this user exist already? NOTE: _id field is 
             var collection = Highscores.find({"user" : user}).fetch();
             if (collection.length != 0) {
                 id_to_update = collection[0]._id;
@@ -172,7 +173,8 @@ if (Meteor.isServer) {
                 }, {
                     user: user,
                     score: score,
-                    group: group
+                    group: group,
+                    dextrickeryID: dextrickeryID
                 });
             } else {
                 console.log("3");
@@ -180,7 +182,8 @@ if (Meteor.isServer) {
                 Highscores.insert({
                     user: user,
                     score: score,
-                    group: group
+                    group: group,
+                    dextrickeryID: dextrickeryID
                 });
                 console.log("4");
             }
