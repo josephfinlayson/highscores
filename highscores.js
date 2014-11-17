@@ -146,7 +146,7 @@ if (Meteor.isServer) {
 
 
     // Maps to, for example: http://highscores_api.meteor.com/api/post_higscore
-    // usage: jQuery.post('api/post_highscore',{user:"string",score:111})
+    // usage: jQuery.post('api/post_highscore',{user:"string",score:111,dextrickeryID:abcdefg})
     RESTstop.add('post_highscore', {
         method: 'POST'
     }, function() {
@@ -156,16 +156,13 @@ if (Meteor.isServer) {
         var dextrickeryID = String(this.params.dextrickeryID);
         var id_to_update = false;
         console.log("user: " + user + "  score: " + score);
-        console.log("0");
 
         if (user && score) {
-            console.log("1");
             // Does this user exist already? NOTE: _id field is 
             var collection = Highscores.find({"user" : user}).fetch();
             if (collection.length != 0) {
                 id_to_update = collection[0]._id;
             }
-            console.log("2");
             // If yes, update them. If no, create them.
             if (id_to_update) {
                 Highscores.update({
@@ -177,8 +174,6 @@ if (Meteor.isServer) {
                     dextrickeryID: dextrickeryID
                 });
             } else {
-                console.log("3");
-
                 Highscores.insert({
                     user: user,
                     score: score,
